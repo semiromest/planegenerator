@@ -90,10 +90,11 @@ public class PlaneGeneratorWindow : EditorWindow
         mesh.RecalculateBounds();
 
         // URP kullanýyorsan aþaðýdaki shader kullanýlabilir
-        Shader urpShader = Shader.Find("Universal Render Pipeline/Lit");
-        if (urpShader != null)
+        Shader shader = Shader.Find("Universal Render Pipeline/Lit") ?? Shader.Find("Standard") ?? Shader.Find("HDRP/Lit");
+
+        if (shader != null)
         {
-            meshRenderer.material = new Material(urpShader);
+            meshRenderer.material = new Material(shader);
         }
         else
         {
